@@ -1,0 +1,26 @@
+{
+  "account_request": {
+    "custom_fields": {
+      "environment": "dev",
+      "cost_center": "10001",
+      "project": "landing-zone",
+      "vpc_cidr": "10.0.0.0/16",
+      "enable_eks": "true",
+      "enable_guardduty": "true",
+      "enable_config": "true"
+    },
+    "control_tower_parameters": {
+      "AccountEmail": "dev-account@your-domain.com",
+      "AccountName": "dev-account",
+      "ManagedOrganizationalUnit": "Development",
+      "SSOUserEmail": "admin@your-domain.com",
+      "SSOUserFirstName": "Admin",
+      "SSOUserLastName": "User"
+    },
+    "account_tags": {
+      "Environment": "Development",
+      "CostCenter": "10001",
+      "Project": "LandingZone"
+    }
+  }
+} 

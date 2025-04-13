@@ -1,0 +1,20 @@
+{
+    "schema_version": "1.0",
+    "account_name": "development",
+    "email": "dev-account@your-domain.com",
+    "ou_path": "Development",
+    "tags": {
+        "Environment": "Development",
+        "CostCenter": "DevOps",
+        "Project": "LandingZone"
+    },
+    "custom_fields": {
+        "vpc_cidr": "10.0.0.0/16",
+        "enable_eks": "true",
+        "enable_guardduty": "true",
+        "enable_config": "true"
+    },
+    "account_customizations_name": "dev",
+    "terraform_version": "1.0.0",
+    "region": "us-east-1"
+} 

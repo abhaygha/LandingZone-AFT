@@ -1,0 +1,42 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+    commands:
+      - pip install -r requirements.txt
+      - aws --version
+      - terraform --version
+
+  pre_build:
+    commands:
+      - echo "Pre-build phase started"
+      - export AWS_DEFAULT_REGION=us-east-1
+      - export TF_VAR_ct_management_account_id=$CT_MANAGEMENT_ACCOUNT_ID
+      - export TF_VAR_log_archive_account_id=$LOG_ARCHIVE_ACCOUNT_ID
+      - export TF_VAR_audit_account_id=$AUDIT_ACCOUNT_ID
+      - export TF_VAR_aft_management_account_id=$AFT_MANAGEMENT_ACCOUNT_ID
+
+  build:
+    commands:
+      - echo "Build phase started"
+      - cd $CODEBUILD_SRC_DIR
+      - terraform init
+      - terraform plan -out=tfplan
+      - terraform apply -auto-approve tfplan
+
+  post_build:
+    commands:
+      - echo "Post-build phase completed"
+      - aws s3 cp tfplan s3://$ARTIFACT_BUCKET/plans/$(date +%Y%m%d%H%M%S).tfplan
+
+artifacts:
+  files:
+    - '**/*'
+  name: build_output
+
+cache:
+  paths:
+    - '/root/.terraform/**/*'
+    - '.terraform/**/*' 
